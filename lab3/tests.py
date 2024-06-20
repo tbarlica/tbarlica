@@ -1,4 +1,5 @@
-import lab3a
-text = lab3a.return_text_value()
-print(text)
-print(lab3a.return_number_value())
+cafeteria_food = ('a','b','c','d')
+
+for food in cafeteria_food:
+
+   print('Do you like ' + food + '? (y/n):')

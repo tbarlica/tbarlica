@@ -42,5 +42,39 @@ def after(date: str) -> str:
             mon = 1
         day = 1  # if tmp_day > this month's max, reset to 1 
     return f"{day:02}/{mon:02}/{year}"
-    
+
 ```
+List comprehension is a shorter way of writing code. The following line:
+
+```
+int(x) for x in date.split('/')
+
+```
+
+Becomes this:
+
+```
+
+result = []
+for x in date.split('/'):
+    result.append(int(x))
+
+```
+
+The above result = [] list will actually bceome a tuple.
+
+The tuple will be unpacked into day, mon, year.
+
+```
+
+day, mon, year = (int(x) for x in date.split('/'))
+
+```
+
+date.split will create a list from a date: 
+
+19/04/1993 becomes list of strings: ['19', '04', '1993'] 
+
+(['19', '04', '1993']) will be transformed into (19, 4, 1993) -> a touple of int, thanks to int(x)
+
+day, mon, year through tuple unpacking will receive the values in the specifc order

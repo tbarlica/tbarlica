@@ -11,7 +11,7 @@ with anyone or anything except for submission for grading. I understand
 that the Academic Honesty Policy will be enforced and
 violators will be reported and appropriate action will be taken.
 
-Author: <Student Name>
+Author: Traian Barlica
 Description: <fill this in>
 '''
 

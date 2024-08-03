@@ -84,3 +84,39 @@ _(['19', '04', '1993'])_ will be transformed into **(19, 4, 1993)** -> a touple 
 ```day, mon, year``` through tuple unpacking will receive the values in the specifc order. In our example: day = 19, mon = 4, year = 1993
 
 ### Part 3 - Understanding increment & leap year
+
+'''
+
+day += 1  # next day
+    
+lyear = year % 4
+if lyear == 0:
+    leap_flag = True
+else:
+    leap_flag = False  # this is not a leap year
+
+lyear = year % 100
+if lyear == 0:
+    leap_flag = False  # this is not a leap year
+
+lyear = year % 400
+if lyear == 0:
+    leap_flag = True  # this is a leap year
+
+'''
+
+```day``` will get incremented
+
+> Each leap year has 366 days instead of 365. This extra leap day occurs in each year that is a multiple of 4, except for years evenly divisible by 100 but not by 400.
+
+The day is added in february, second month.
+
+A year that is multiple of 4 is also divisible by 4 -> ```year % 4 == 0``` -> ```leap_flag = True```
+
+Once every 100 years, there is no leap year even though 100 % 4 == 0. So ```year % 100``` -> ```leap_flag = False```
+
+Once every 100 years? Yes, but... not the 400th one. Once every 400 years there will be doomsday conspirations. And a leap year: ```year % 400``` -> ```leap_flag = True```
+
+
+
+  

@@ -114,6 +114,41 @@ Once every 100 years, there is no leap year even though 100 % 4 == 0. So ```year
 
 Once every 100 years? Yes, but... not the 400th one. Once every 400 years there will be doomsday conspirations. And a leap year: ```year % 400``` -> ```leap_flag = True```
 
+### Part 4 - Understanding how the date changes in general and when it is a leap year
+
+```
+
+mon_dict= {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
+           7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+if mon == 2 and leap_flag:
+    mon_max = 29
+else:
+    mon_max = mon_dict[mon]
+    
+if day > mon_max:
+    mon += 1
+    if mon > 12:
+        year += 1
+        mon = 1
+    day = 1  # if tmp_day > this month's max, reset to 1
+
+```
+
+```mon_dict``` will have **month as a key** and **total days as value**
+
+If the month is February (2) and ```leap_flag``` is ```true```, it means there is a leap year and februry will have 29 days. Else, same ```value```
+
+```mon_max``` holds the value of total days in a month
+
+If the day we have as an argument is greater than total days in a month, month gets incremented and day becomes 1. If the month is December (12), year gets incremented and month also becomes 1.
+
+In the end, the function returns the date: ```return f"{day:02}/{mon:02}/{year}```.
+
+
+
+
+
+
 
 
   

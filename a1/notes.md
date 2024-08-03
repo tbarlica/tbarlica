@@ -84,9 +84,7 @@ _(['19', '04', '1993'])_ will be transformed into **(19, 4, 1993)** -> a touple 
 ```day, mon, year``` through tuple unpacking will receive the values in the specifc order. In our example: day = 19, mon = 4, year = 1993
 
 ### Part 3 - Understanding increment & leap year
-
-'''
-
+```
 day += 1  # next day
     
 lyear = year % 4
@@ -102,8 +100,7 @@ if lyear == 0:
 lyear = year % 400
 if lyear == 0:
     leap_flag = True  # this is a leap year
-
-'''
+```
 
 ```day``` will get incremented
 

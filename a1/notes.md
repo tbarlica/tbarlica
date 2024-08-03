@@ -2,6 +2,7 @@
 
 ## after()
 
+### Part 1 - The Function
 ```
 
 def after(date: str) -> str: 
@@ -44,6 +45,9 @@ def after(date: str) -> str:
     return f"{day:02}/{mon:02}/{year}"
 
 ```
+
+### Part 2 - Understanding ```int(x) for x in date.split('/')```
+
 List comprehension is a shorter way of writing code. The following line:
 
 ```
@@ -78,3 +82,5 @@ _19/04/1993_ becomes list of strings: **['19', '04', '1993']**
 _(['19', '04', '1993'])_ will be transformed into **(19, 4, 1993)** -> a touple of int, thanks to ```int(x)```
 
 ```day, mon, year``` through tuple unpacking will receive the values in the specifc order. In our example: day = 19, mon = 4, year = 1993
+
+### Part 3 - Understanding increment & leap year

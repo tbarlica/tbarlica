@@ -71,10 +71,10 @@ day, mon, year = (int(x) for x in date.split('/'))
 
 ```
 
-date.split will create a list from a date: 
+```date.split``` will create a list from a given date: 
 
-19/04/1993 becomes list of strings: ['19', '04', '1993'] 
+_19/04/1993_ becomes list of strings: **['19', '04', '1993']**
 
-(['19', '04', '1993']) will be transformed into (19, 4, 1993) -> a touple of int, thanks to int(x)
+_(['19', '04', '1993'])_ will be transformed into **(19, 4, 1993)** -> a touple of int, thanks to ```int(x)```
 
-day, mon, year through tuple unpacking will receive the values in the specifc order
+```day, mon, year``` through tuple unpacking will receive the values in the specifc order. In our example: day = 19, mon = 4, year = 1993

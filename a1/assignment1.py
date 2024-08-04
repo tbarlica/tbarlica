@@ -97,7 +97,7 @@ def day_iter(start_date: str, num: int) -> str:
     "iterates from start date by num to return end date in DD/MM/YYYY"
     i = 0 # counter will increment or decrement to num
     if num > 0:
-        while i < num: 
+        while i < num:
             start_date = after(start_date)
             i += 1
     else:
@@ -108,6 +108,8 @@ def day_iter(start_date: str, num: int) -> str:
 
 if __name__ == "__main__":
     # check length of arguments
+    if len(sys.argv) != 3:
+        usage()
     # check first arg is a valid date
     # check that second arg is a valid number (+/-)
     # call day_iter function to get end date, save to x

@@ -2,7 +2,7 @@
 
 '''
 Author: Traian Barlica
-Description: OPS445 Assignment 1 - Summer 2023
+Description: OPS445 Assignment 1 Version C - Summer 2024
 Program: assignment1.py 
 The python code in this file is original work written by
 Traian Barlica. No code in this file is copied from any other source
@@ -78,7 +78,15 @@ def usage():
 
 def valid_date(date: str) -> bool:
     "check validity of date"
-    ...
+    try:
+        day, month, year = (int(x) for x in date.split('/'))
+        if month < 1 or month > 12:
+            return False
+        if day < 1 or day > mon_max(month, year):
+            return False
+        return True
+    except ValueError:
+        return False
 
 def day_iter(start_date: str, num: int) -> str:
     "iterates from start date by num to return end date in DD/MM/YYYY"

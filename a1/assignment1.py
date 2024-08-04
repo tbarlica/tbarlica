@@ -50,16 +50,7 @@ def after(date: str) -> str:
     day, mon, year = (int(x) for x in date.split('/'))
     day += 1  # next day
 
-    leap_flag = leap_year(year)
-
-    mon_dict= {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-           7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
-    if mon == 2 and leap_flag:
-        mon_max = 29
-    else:
-        mon_max = mon_dict[mon]
-
-    if day > mon_max:
+    if day > mon_max(mon, year):
         mon += 1
         if mon > 12:
             year += 1

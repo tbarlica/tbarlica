@@ -31,53 +31,71 @@ def day_of_week(date: str) -> str:
     return days[num]
 
 def leap_year(year: int) -> bool:
-    "return true if the year is a leap year"
+    '''
+    leap day occur in each year that is a multiple of 4, except for years evenly divisible by 100 but not by 400
+    return true if the year is a leap year
+    '''
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0): # leap year check
         return True
     return False
 
 def mon_max(month:int, year:int) -> int:
-    "returns the maximum day for a given month. Includes leap year check"
+    '''
+    mon_max() -> int
+    returns the days in a month for a given month
+    calls leap_year check when month is February and adjusts days accordingly
+    '''
     mon_dict= {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-           7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+               7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
     if month == 2 and leap_year(year): # check if leap year to determine max days in Feb
-        return 29
+        return 29 # change Feb to 29 days
     else:
-        return mon_dict[month]
+        return mon_dict[month] # return days in month
 
 def after(date: str) -> str:
     '''
     after() -> date for next day in DD/MM/YYYY string format
-
     Return the date for the next day of the given date in DD/MM/YYYY format.
     This function has been tested to work for year after 1582
+    Calls mon_max() to determine the max days in a month
+
+    The function will increment the day by 1, if the day is greater than the max days in the month, 
+    it will increment the month by 1 and reset the day to 1 
+    and if the month is 12, it will increment the year by 1
     '''
     day, mon, year = (int(x) for x in date.split('/'))
-    day += 1  # next day
+    day += 1  # next day increment
 
-    if day > mon_max(mon, year):
+    if day > mon_max(mon, year): # check to see if month needs to be incremented
         mon += 1
-        if mon > 12:
+        if mon > 12: # check to see if year needs to be incremented
             year += 1
             mon = 1
         day = 1  # if tmp_day > this month's max, reset to 1
     return f"{day:02}/{mon:02}/{year}"
 
 def before(date: str) -> str:
-    "Returns previous day's date as DD/MM/YYYY"
-    day, mon, year = (int(x) for x in date.split('/'))
-    day -= 1  # previous day
+    '''
+    Returns previous day's date as DD/MM/YYYY
+    Calls mon_max() to determine the max days in a month
 
-    if day == 0:
+    The function will decrement the day by 1, if the day is less than 1,
+    it will decrement the month by 1 and reset the day to the max days in the previous month,
+    if the month is 1, it will decrement the year by 1 and set the month to 12
+    '''
+    day, mon, year = (int(x) for x in date.split('/'))
+    day -= 1  # previous day decrement
+
+    if day == 0: # check to see if month needs to be decremented
         mon -= 1
-        if mon == 0:
+        if mon == 0: # check to see if year needs to be decremented
             year -= 1
             mon = 12
         day = mon_max(mon, year)  # if tmp_day = 0, reset to last month's max
     return f"{day:02}/{mon:02}/{year}"
 
 def usage():
-    "Print a usage message to the user"
+    "Print a usage message to the user if the arguments are invalid"
     print("Usage: " + str(sys.argv[0]) + " DD/MM/YYYY NN")
     sys.exit()
 
@@ -85,9 +103,9 @@ def valid_date(date: str) -> bool:
     "check validity of date"
     try:
         day, month, year = (int(x) for x in date.split('/'))
-        if month < 1 or month > 12:
+        if month < 1 or month > 12: # check month range 1-12
             return False
-        if day < 1 or day > mon_max(month, year):
+        if day < 1 or day > mon_max(month, year): # check day range 1-max days in month
             return False
         return True
     except ValueError:
@@ -96,7 +114,7 @@ def valid_date(date: str) -> bool:
 def day_iter(start_date: str, num: int) -> str:
     "iterates from start date by num to return end date in DD/MM/YYYY"
     i = 0 # counter will increment or decrement to num
-    if num > 0:
+    if num > 0: # check if num is positive or negative to determine if we increment or decrement
         while i < num:
             start_date = after(start_date)
             i += 1
@@ -107,18 +125,17 @@ def day_iter(start_date: str, num: int) -> str:
     return start_date
 
 if __name__ == "__main__":
-    # check length of arguments
+    # check number of arguments
     if len(sys.argv) != 3:
         usage()
-    # check first arg is a valid date
+    # check first arg is a valid date (DD/MM/YYYY)
     if not valid_date(sys.argv[1]):
         usage()
-    # check that second arg is a valid number (+/-)
+    # check that second arg is a valid number (+/-) and assign to num
     try:
         num = int(sys.argv[2])
     except ValueError:
         usage()
-    # call day_iter function to get end date, save to x
+    # call day_iter function to get end date, save to x, and print day of week
     x = day_iter(sys.argv[1], num)
-    # print(f'The end date is {day_of_week(x)}, {x}.')
     print(f'The end date is {day_of_week(x)}, {x}.')

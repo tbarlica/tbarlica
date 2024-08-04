@@ -137,13 +137,13 @@ def day_iter(start_date: str, num: int) -> str:
 
 def check_num(num: str) -> bool:
     "check if the number is a valid number"
-    if num[0] in '-+0123456789':
-        for i in num[1:]:
+    if num[0] in '-+0123456789': # if first character is a number or +/- execute the loop
+        for i in num[1:]: # if the rest of the characters are numbers, return True
             if i not in '0123456789':
                 return False
-        return True
+        return True # valid number
     return False
-    
+
 if __name__ == "__main__":
     # check number of arguments
     if len(sys.argv) != 3:
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # check that second arg is a valid number (+/-) and assign to num
     num = sys.argv[2]
     if check_num(num):
-        num = int(num)
+        num = int(num) # convert to integer
     else:
         usage()
     # call day_iter function to get end date, save to x, and print day of week

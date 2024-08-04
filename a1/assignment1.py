@@ -13,9 +13,9 @@ that the Academic Honesty Policy will be enforced and
 violators will be reported and appropriate action will be taken.
 
 Description: 
-    -This program takes a date in the format DD/MM/YYYY and returns the date after or before a given number of days.
-    -The program also returns the day of the week for a given date.
-    -The program checks for leap years and validates the date input.
+-This program takes a date in the format DD/MM/YYYY and returns the date after or before a given number of days.
+-The program also returns the day of the week for a given date.
+-The program checks for leap years and validates the date input.
 '''
 
 import sys
@@ -122,4 +122,3 @@ if __name__ == "__main__":
     x = day_iter(sys.argv[1], num)
     # print(f'The end date is {day_of_week(x)}, {x}.')
     print(f'The end date is {day_of_week(x)}, {x}.')
-    pass

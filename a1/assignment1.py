@@ -20,9 +20,18 @@ Description:
 
 import sys
 
+def parse_date(date: str):
+    """
+    Parses a date string in DD/MM/YYYY format into day, month, and year integers.
+    Additional function in assignment1 for code refactoring
+    Function takes a date string in DD/MM/YYYY format and returns a tuple of day, month, and year as integers
+    """
+    day, month, year = (int(x) for x in date.split('/'))
+    return day, month, year
+
 def day_of_week(date: str) -> str:
     "Based on the algorithm by Tomohiko Sakamoto"
-    day, month, year = (int(x) for x in date.split('/'))
+    day, month, year = parse_date(date)
     days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     offset = {1:0, 2:3, 3:2, 4:5, 5:0, 6:3, 7:5, 8:1, 9:4, 10:6, 11:2, 12:4}
     if month < 3:
@@ -63,7 +72,7 @@ def after(date: str) -> str:
     it will increment the month by 1 and reset the day to 1 
     and if the month is 12, it will increment the year by 1
     '''
-    day, mon, year = (int(x) for x in date.split('/'))
+    day, mon, year = parse_date(date)
     day += 1  # next day increment
 
     if day > mon_max(mon, year): # check to see if month needs to be incremented
@@ -83,7 +92,7 @@ def before(date: str) -> str:
     it will decrement the month by 1 and reset the day to the max days in the previous month,
     if the month is 1, it will decrement the year by 1 and set the month to 12
     '''
-    day, mon, year = (int(x) for x in date.split('/'))
+    day, mon, year = parse_date(date)
     day -= 1  # previous day decrement
 
     if day == 0: # check to see if month needs to be decremented
@@ -102,7 +111,7 @@ def usage():
 def valid_date(date: str) -> bool:
     "check validity of date"
     try:
-        day, month, year = (int(x) for x in date.split('/'))
+        day, month, year = parse_date(date)
         if month < 1 or month > 12: # check month range 1-12
             return False
         if day < 1 or day > mon_max(month, year): # check day range 1-max days in month

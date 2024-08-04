@@ -63,33 +63,12 @@ def before(date: str) -> str:
     day, mon, year = (int(x) for x in date.split('/'))
     day -= 1  # previous day
 
-    lyear = year % 4
-    if lyear == 0:
-        leap_flag = True
-    else:
-        leap_flag = False  # this is not a leap year
-
-    lyear = year % 100
-    if lyear == 0:
-        leap_flag = False  # this is not a leap year
-
-    lyear = year % 400
-    if lyear == 0:
-        leap_flag = True  # this is a leap year
-
-    mon_dict= {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-           7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
-    if mon - 1 == 2 and leap_flag:
-        mon_max = 29
-    else:
-        mon_max = mon_dict[mon - 1]
-
     if day == 0:
         mon -= 1
         if mon == 0:
             year -= 1
             mon = 12
-        day = mon_max  # if tmp_day = 0, reset to last month's max
+        day = mon_max(mon, year)  # if tmp_day = 0, reset to last month's max
     return f"{day:02}/{mon:02}/{year}"
 
 def usage():

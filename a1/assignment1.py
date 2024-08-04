@@ -26,7 +26,10 @@ def parse_date(date: str):
     Additional function in assignment1 for code refactoring
     Function takes a date string in DD/MM/YYYY format and returns a tuple of day, month, and year as integers
     """
-    day, month, year = (int(x) for x in date.split('/'))
+    if len(date) != 10 or date[2] != '/' or date[5] != '/':
+        return None, None, None
+    else:
+        day, month, year = (int(x) for x in date.split('/'))
     return day, month, year
 
 def day_of_week(date: str) -> str:
@@ -110,15 +113,14 @@ def usage():
 
 def valid_date(date: str) -> bool:
     "check validity of date"
-    try:
-        day, month, year = parse_date(date)
-        if month < 1 or month > 12: # check month range 1-12
-            return False
-        if day < 1 or day > mon_max(month, year): # check day range 1-max days in month
-            return False
-        return True
-    except ValueError:
+    day, month, year = parse_date(date)
+    if day is None or month is None or year is None:
         return False
+    if month < 1 or month > 12: # check month range 1-12
+        return False
+    if day < 1 or day > mon_max(month, year): # check day range 1-max days in month
+        return False
+    return True
 
 def day_iter(start_date: str, num: int) -> str:
     "iterates from start date by num to return end date in DD/MM/YYYY"

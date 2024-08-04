@@ -114,6 +114,10 @@ if __name__ == "__main__":
     if not valid_date(sys.argv[1]):
         usage()
     # check that second arg is a valid number (+/-)
+    try:
+        num = int(sys.argv[2])
+    except ValueError:
+        usage()
     # call day_iter function to get end date, save to x
     # print(f'The end date is {day_of_week(x)}, {x}.')
     pass

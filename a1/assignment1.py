@@ -45,19 +45,7 @@ def after(date: str) -> str:
     day, mon, year = (int(x) for x in date.split('/'))
     day += 1  # next day
 
-    lyear = year % 4
-    if lyear == 0:
-        leap_flag = True
-    else:
-        leap_flag = False  # this is not a leap year
-
-    lyear = year % 100
-    if lyear == 0:
-        leap_flag = False  # this is not a leap year
-
-    lyear = year % 400
-    if lyear == 0:
-        leap_flag = True  # this is a leap year
+    leap_flag = leap_year(year)
 
     mon_dict= {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
            7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}

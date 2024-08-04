@@ -11,6 +11,11 @@ textbook, or on-line resource. I have not shared this python script
 with anyone or anything except for submission for grading. I understand
 that the Academic Honesty Policy will be enforced and
 violators will be reported and appropriate action will be taken.
+
+Description: 
+    -This program takes a date in the format DD/MM/YYYY and returns the date after or before a given number of days.
+    -The program also returns the day of the week for a given date.
+    -The program checks for leap years and validates the date input.
 '''
 
 import sys
@@ -27,7 +32,7 @@ def day_of_week(date: str) -> str:
 
 def leap_year(year: int) -> bool:
     "return true if the year is a leap year"
-    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0): # leap year check
         return True
     return False
 
@@ -35,7 +40,7 @@ def mon_max(month:int, year:int) -> int:
     "returns the maximum day for a given month. Includes leap year check"
     mon_dict= {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
            7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
-    if month == 2 and leap_year(year):
+    if month == 2 and leap_year(year): # check if leap year to determine max days in Feb
         return 29
     else:
         return mon_dict[month]
@@ -90,9 +95,9 @@ def valid_date(date: str) -> bool:
 
 def day_iter(start_date: str, num: int) -> str:
     "iterates from start date by num to return end date in DD/MM/YYYY"
-    i = 0
+    i = 0 # counter will increment or decrement to num
     if num > 0:
-        while i < num:
+        while i < num: 
             start_date = after(start_date)
             i += 1
     else:

@@ -26,10 +26,10 @@ def parse_date(date: str):
     Additional function in assignment1 for code refactoring
     Function takes a date string in DD/MM/YYYY format and returns a tuple of day, month, and year as integers
     """
-    if len(date) != 10 or date[2] != '/' or date[5] != '/':
+    if len(date) != 10 or date[2] != '/' or date[5] != '/': # check for correct format
         return None, None, None
     else:
-        day, month, year = (int(x) for x in date.split('/'))
+        day, month, year = (int(x) for x in date.split('/')) # split date and convert to integers
     return day, month, year
 
 def day_of_week(date: str) -> str:

@@ -82,7 +82,16 @@ def valid_date(date: str) -> bool:
 
 def day_iter(start_date: str, num: int) -> str:
     "iterates from start date by num to return end date in DD/MM/YYYY"
-    ...
+    i = 0
+    if num > 0:
+        while i < num:
+            start_date = after(start_date)
+            i += 1
+    else:
+        while i > num:
+            start_date = before(start_date)
+            i -= 1
+    return start_date
 
 if __name__ == "__main__":
     # check length of arguments

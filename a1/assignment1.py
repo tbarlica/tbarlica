@@ -119,5 +119,7 @@ if __name__ == "__main__":
     except ValueError:
         usage()
     # call day_iter function to get end date, save to x
+    x = day_iter(sys.argv[1], num)
     # print(f'The end date is {day_of_week(x)}, {x}.')
+    print(f'The end date is {day_of_week(x)}, {x}.')
     pass

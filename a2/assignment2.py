@@ -38,7 +38,15 @@ def get_sys_mem() -> int:
 def get_avail_mem() -> int:
     "Return total memory that is currently in use"
     # Open the meminfo file to accomplish the task!
-    pass
+    meminfo_file = open("/proc/meminfo", "r")
+    lines = meminfo_file.readlines()
+    meminfo_file.close()
+    
+    for line in lines:
+        if "MemAvailable:" in line:
+            parts = line.split()
+            available_memory_kb = int(parts[1])
+            return available_memory_kb
 
 def pids_of_prog(app_name: str) -> list:
     "Given an app name, return all pids associated with app"

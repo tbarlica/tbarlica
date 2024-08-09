@@ -19,12 +19,21 @@ def parse_command_args() -> object:
 
 def percent_to_graph(percent: float, length: int=20) -> str:
     "Turns a percent 0.0 - 1.0 into a bar graph"
+    
     pass
 
 def get_sys_mem() -> int:
     "Return total system memory (used or available) in kB"
     # Open the meminfo file to accomplish the task!
-    pass
+    meminfo_file = open("/proc/meminfo", "r")
+    lines = meminfo_file.readlines()
+    meminfo_file.close()
+    
+    for line in lines:
+        if "MemTotal:" in line:
+            parts = line.split()
+            total_memory_kb = int(parts[1])
+            return total_memory_kb
 
 def get_avail_mem() -> int:
     "Return total memory that is currently in use"

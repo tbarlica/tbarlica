@@ -19,8 +19,8 @@ def parse_command_args() -> object:
 
 def percent_to_graph(percent: float, length: int=20) -> str:
     "Turns a percent 0.0 - 1.0 into a bar graph"
-    
-    pass
+    num_hashes = int(percent * length)
+    return '#' * num_hashes + '-' * (length - num_hashes)
 
 def get_sys_mem() -> int:
     "Return total system memory (used or available) in kB"

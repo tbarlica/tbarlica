@@ -1,3 +1,27 @@
+'''
+Author: Traian Barlica
+Description: OPS445 Assignment 2 Version A - Summer 2024
+Program: assignment2.py 
+The python code in this file is original work written by
+Traian Barlica. No code in this file is copied from any other source
+except those provided by the course instructor, including any person,
+textbook, or on-line resource. I have not shared this python script
+with anyone or anything except for submission for grading. I understand
+that the Academic Honesty Policy will be enforced and
+violators will be reported and appropriate action will be taken.
+
+Description:
+
+This program is a memory visualizer that shows the memory usage of a program or all associated processes.
+The program reads the /proc/meminfo file to get the total memory and available memory.
+It calculates the memory usage as a percentage and displays it as a bar graph.
+The program can display memory usage in human-readable format.
+The program can display memory usage of all processes associated with a program.
+The program reads the /proc/<pid>/smaps file to get the resident memory of a process.
+The program displays the memory usage of each process as a bar graph.
+
+'''
+
 #!/usr/bin/env python3
 
 import argparse

@@ -71,7 +71,6 @@ def pids_of_prog(app_name: str) -> list:
     # Please use os.popen('pidof <app>') to accomplish the task!
     pids = os.popen(f'pidof {app_name}').read().strip().split() # strip() removes leading/trailing whitespace
     return pids
-    pass
 
 def rss_mem_of_pid(proc_id: str) -> int:
     "Given a process id, return the Resident memory used"

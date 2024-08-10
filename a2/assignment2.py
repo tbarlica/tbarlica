@@ -18,12 +18,20 @@ def parse_command_args() -> object:
     return args
 
 def percent_to_graph(percent: float, length: int=20) -> str:
-    "Turns a percent 0.0 - 1.0 into a bar graph"
+    '''
+    Turns a percent 0.0 - 1.0 into a bar graph
+    The function will return a string of hashes and spaces to represent the percentage of memory used.
+    '''
     num_hashes = int(percent * length)
-    return '#' * num_hashes + '-' * (length - num_hashes)
+    return '#' * num_hashes + ' ' * (length - num_hashes)
 
 def get_sys_mem() -> int:
-    "Return total system memory (used or available) in kB"
+    '''
+    Return total system memory (used or available) in kB
+    The function will open the meminfo file and return the total memory.
+    Total memory in linux is stored in the MemTotal line.
+    Total memory is the sum of free memory and used memory.
+    '''
     # Open the meminfo file to accomplish the task!
     meminfo_file = open("/proc/meminfo", "r")
     lines = meminfo_file.readlines()
@@ -36,7 +44,12 @@ def get_sys_mem() -> int:
             return total_memory_kb
 
 def get_avail_mem() -> int:
-    "Return total memory that is currently in use"
+    '''
+    Return total memory that is currently in use
+    The function will open the meminfo file and return the available memory.
+    Avialable memory in linux is stored in the MemAvailable line.
+    Avaialble memory is the sum of free memory and memory used by cache.
+    '''
     # Open the meminfo file to accomplish the task!
     meminfo_file = open("/proc/meminfo", "r")
     lines = meminfo_file.readlines()

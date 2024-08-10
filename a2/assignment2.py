@@ -73,9 +73,25 @@ def pids_of_prog(app_name: str) -> list:
     return pids
 
 def rss_mem_of_pid(proc_id: str) -> int:
+    '''
     "Given a process id, return the Resident memory used"
     # For a process, open the smaps file and return the total of each Rss line.
-    pass
+    
+    open the smaps file for the given process id and return the total Resident memory used
+    Resident memory is the memory that is actually in use by the process
+    the function will read the smaps file line by line and sum the Rss values
+    '''
+
+    total_rss = 0
+    try:
+        smaps_file = open(f"/proc/{proc_id}/smaps", "r")
+        for line in smaps_file:
+            if line.startswith("Rss:"): 
+                total_rss += int(line.split()[1]) # Rss is the second value in the line
+        smaps_file.close()
+    except FileNotFoundError:
+        pass
+    return total_rss
 
 def bytes_to_human_r(kibibytes: int, decimal_places: int=2) -> str:
     "Turn 1,024 into 1 MiB, for example"

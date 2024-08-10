@@ -112,9 +112,43 @@ def bytes_to_human_r(kibibytes: int, decimal_places: int=2) -> str:
     return str_result
 
 if __name__ == "__main__":
-    args = parse_command_args()
+    args = parse_command_args() # Parse the command line arguments
     
-    if not args.program:  # No program name is specified.
-        pass
-    else:
-        pass
+    total_mem = get_sys_mem() # Get the total system memory
+    avail_mem = get_avail_mem() # Get the available memory
+    used_mem = total_mem - avail_mem # Calculate the used memory
+    percent_used = used_mem / total_mem # Calculate the percentage of memory used
+    
+    if not args.program:  # No program name is specified
+        graph = percent_to_graph(percent_used, args.length) # Get the graph representation of memory usage
+        if args.human_readable: # Print human readable output
+            # Print the memory usage in human readable format
+            print(f"Memory [ {graph} | {percent_used:.0%} ] ({bytes_to_human_r(used_mem)} / {bytes_to_human_r(total_mem)})")
+        else:
+            print(f"Memory [ {graph} | {percent_used:.0%} ] ({used_mem} / {total_mem})")
+    else: # A program name is specified
+        pids = pids_of_prog(args.program) # Get the process ids of the program
+        if not pids:
+            print(f"{args.program} not found.") # Print a message if the program is not found
+        else:
+            total_rss = 0 
+            for pid in pids:
+                rss_mem = rss_mem_of_pid(pid) # Get the resident memory of the process
+                total_rss += rss_mem # Add the resident memory to the total
+                percent_used = rss_mem / total_mem # Calculate the percentage of memory used
+                graph = percent_to_graph(percent_used, args.length)
+                # Print the memory usage of each process
+                # :<10 is used to left align the pid in a 10 character wide field
+                if args.human_readable:
+                    print(f"{pid:<10} [ {graph} | {percent_used:.0%} ] {bytes_to_human_r(rss_mem)} / {bytes_to_human_r(total_mem)}")
+                else:
+                    print(f"{pid:<10} [ {graph} | {percent_used:.0%} ] ({rss_mem} / {total_mem})")
+            # If there are multiple processes, print the total memory usage        
+            if len(pids) > 1:
+                percent_used = total_rss / total_mem
+                graph = percent_to_graph(percent_used, args.length)
+                if args.human_readable:
+                    print(f"{args.program:<10} [ {graph} | {percent_used:.0%} ] {bytes_to_human_r(total_rss)} / {bytes_to_human_r(total_mem)}")
+                else:
+                    print(f"{args.program:<10} [ {graph} | {percent_used:.0%} ] ({total_rss} / {total_mem})")
+

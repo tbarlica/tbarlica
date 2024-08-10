@@ -5,13 +5,17 @@ import os
 import sys
 
 def parse_command_args() -> object:
-    "Set up argparse here. Call this function inside main."
+    '''
+    Set up argparse here. Call this function inside main.
+    parser.add_argument() is used to add arguments to the parser
+    parser.parse_args() is used to parse the command line arguments
+    human-readable argument is added with -H alias
+    '''
     parser = argparse.ArgumentParser(description="Memory Visualiser -- See Memory Usage Report with bar charts", 
                                      epilog="Copyright 2023")
     
+    parser.add_argument("-H", "--human-readable", action="store_true", help="Prints sizes in human readable format")
     parser.add_argument("-l", "--length", type=int, default=20, help="Specify the length of the graph. Default is 20.")
-    
-    # Make this entry for human-readable. Check the docs to make it a True/False option.
     parser.add_argument("program", type=str, nargs='?', help="If a program is specified, show memory use of all associated processes. Show only total use if not.")
     
     args = parser.parse_args()

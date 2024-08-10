@@ -39,8 +39,8 @@ def get_sys_mem() -> int:
     
     for line in lines:
         if "MemTotal:" in line:
-            parts = line.split()
-            total_memory_kb = int(parts[1])
+            parts = line.split() # split the line into parts using whitespace
+            total_memory_kb = int(parts[1]) # second part is the total memory in kB
             return total_memory_kb
 
 def get_avail_mem() -> int:

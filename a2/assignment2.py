@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 '''
 Author: Traian Barlica
 Description: OPS445 Assignment 2 Version A - Summer 2024
@@ -19,10 +21,7 @@ The program can display memory usage in human-readable format.
 The program can display memory usage of all processes associated with a program.
 The program reads the /proc/<pid>/smaps file to get the resident memory of a process.
 The program displays the memory usage of each process as a bar graph.
-
 '''
-
-#!/usr/bin/env python3
 
 import argparse
 import os
@@ -35,7 +34,7 @@ def parse_command_args() -> object:
     parser.parse_args() is used to parse the command line arguments
     human-readable argument is added with -H alias
     '''
-    parser = argparse.ArgumentParser(description="Memory Visualiser -- See Memory Usage Report with bar charts", 
+    parser = argparse.ArgumentParser(description="Memory Visualiser -- See Memory Usage Report with bar charts",
                                      epilog="Copyright 2023")
     
     parser.add_argument("-H", "--human-readable", action="store_true", help="Prints sizes in human readable format")
